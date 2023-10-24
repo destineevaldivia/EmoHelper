@@ -1,0 +1,21 @@
+# Ignore Node.js related files and directories
+/node_modules
+/.pnp
+.pnp.js
+# Ignore Visual Studio Code settings
+.vscode/
+# Ignore client-side specific dependencies
+client/node_modules/
+# Ignore server-side specific dependencies
+server/node_modules/
+# Ignore coverage reports if you're running tests
+/coverage
+# Ignore build artifacts (e.g., compiled JavaScript, bundled assets)
+/build
+# Ignore server-specific environment files
+server/.env
+# Ignore miscellaneous files (e.g., macOS .DS_Store files)
+.DS_Store
+
+#Production
+/build

@@ -29,7 +29,9 @@ const client_secret = process.env.CLIENT_SECRET;
 
 console.log(client_id);
 
-app.get("/login", (req, res) => {});
+app.get("/login", (req, res) => {
+  res.json("Hello set up auth here");
+});
 
 app.listen(PORT, () =>
   console.log(`Server running on Port http://localhost:${PORT}`)

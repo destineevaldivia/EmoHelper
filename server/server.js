@@ -8,29 +8,32 @@ import "dotenv/config";
 const app = express();
 // const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 // app.use(express.static(REACT_BUILD_DIR));
-
 const PORT = process.env.PORT || 8080;
-
 // Configuring cors middleware
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // related to build, creates an endpoint for the route /api
-// app.get('/', (req, res) => {
+// app.get('/api', (req, res) => {
 //res.json({ message: 'Hello from My template ExpressJS' });
 //   res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 // });
 
-// Requests User Authorization
-const client_id = process.env.CLIENT_ID;
-const client_secret = process.env.CLIENT_SECRET;
-// const redirect_uri = "http://localhost:8080/login";
+// Requests User Auth from Spotify
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
-console.log(client_id);
-
-app.get("/login", (req, res) => {
-  res.json("Hello set up auth here");
+app.get("/login", function (req, res) {
+  res.redirect(
+    "https://accounts.spotify.com/authorize?" +
+      querystring.stringify({
+        response_type: "code",
+        client_id: CLIENT_ID,
+        redirect_uri: REDIRECT_URI,
+      })
+  );
 });
 
 app.listen(PORT, () =>

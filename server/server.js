@@ -1,7 +1,7 @@
 import express, { urlencoded } from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser";
-import path from "path";
+// import cookieParser from "cookie-parser";
+// import path from "path";
 import "dotenv/config";
 // import db from "./db/db-connection.js";
 
@@ -23,9 +23,11 @@ app.use(express.json());
 // });
 
 // Requests User Authorization
-const client_id = process.env.CLIENTID;
-const client_secret = process.env.CLIENTSECRET;
-const redirect_uri = "http://localhost:8080/login";
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
+// const redirect_uri = "http://localhost:8080/login";
+
+console.log(client_id);
 
 app.get("/login", (req, res) => {});
 

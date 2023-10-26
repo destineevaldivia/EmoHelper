@@ -23,11 +23,23 @@ app.use(express.json());
 //res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 // });
 
-// Requests User Auth from Spotify
+//Requests User Auth from Spotify
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+//Generates a random string containing numbers and letters for security reasons
+const generateRandomString = (length) => {
+  let text = "";
+  const possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
+const stateKey = "spotify_auth_state";
 
+//Login handler for logging into Spotify
 app.get("/login", (req, res) => {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);

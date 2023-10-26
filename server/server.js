@@ -44,8 +44,35 @@ app.get("/login", (req, res) => {
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
+//exchange the authorization code for an access token by sending a POST request to the /api/token endpoint.
 app.get("/callback", (req, res) => {
-  res.send("callback");
+  const code = req.query.code || null;
+
+  axios({
+    method: "post",
+    url: "https://accounts.spotify.com/api/token",
+    data: querystring.stringify({
+      grant_type: "authorization_code",
+      code: code,
+      redirect_uri: REDIRECT_URI,
+    }),
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: `Basic ${new Buffer.from(
+        `${CLIENT_ID}:${CLIENT_SECRET}`
+      ).toString("base64")}`,
+    },
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
+      } else {
+        res.send(response);
+      }
+    })
+    .catch((error) => {
+      res.send(error);
+    });
 });
 
 app.listen(PORT, () =>

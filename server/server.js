@@ -27,7 +27,7 @@ app.use(express.json());
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
-//Generates a random string containing numbers and letters for security reasons
+//Generates a random string containing numbers and letters for security reasons to use in Login handler
 const generateRandomString = (length) => {
   let text = "";
   const possible =
@@ -57,6 +57,7 @@ app.get("/login", (req, res) => {
 });
 
 //Exchanges the auth code for an access token by sending a POST request to the /api/token endpoint from Spotify
+//Then retrieves user spotify details
 app.get("/callback", (req, res) => {
   const code = req.query.code || null;
 
@@ -100,30 +101,30 @@ app.get("/callback", (req, res) => {
 });
 
 //Refreshes Spotify token, since it expires after 3600 seconds
-// app.get("/refresh_token", (req, res) => {
-//   const { refresh_token } = req.query;
+app.get("/refresh_token", (req, res) => {
+  const { refresh_token } = req.query;
 
-//   axios({
-//     method: "post",
-//     url: "https://accounts.spotify.com/api/token",
-//     data: querystring.stringify({
-//       grant_type: "refresh_token",
-//       refresh_token: refresh_token,
-//     }),
-//     headers: {
-//       "content-type": "application/x-www-form-urlencoded",
-//       Authorization: `Basic ${Buffer.from(
-//         `${CLIENT_ID}:${CLIENT_SECRET}`
-//       ).toString("base64")}`,
-//     },
-//   })
-//     .then((response) => {
-//       res.send(response.data);
-//     })
-//     .catch((error) => {
-//       res.send(error);
-//     });
-// });
+  axios({
+    method: "post",
+    url: "https://accounts.spotify.com/api/token",
+    data: querystring.stringify({
+      grant_type: "refresh_token",
+      refresh_token: refresh_token,
+    }),
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: `Basic ${new Buffer.from(
+        `${CLIENT_ID}:${CLIENT_SECRET}`
+      ).toString("base64")}`,
+    },
+  })
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
 
 app.listen(PORT, () =>
   console.log(`Server running on Port http://localhost:${PORT}`)

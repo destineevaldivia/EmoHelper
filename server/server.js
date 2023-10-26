@@ -1,32 +1,36 @@
 import express, { urlencoded } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import path from "path";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 import "dotenv/config";
-// import db from "./db/db-connection.js";
+//import db from "./db/db-connection.js";
 import querystring from "querystring";
 import axios from "axios";
 
-const app = express();
-///example: Users/cristina/src/2022H2TemplateFinal/client/build
-// example:const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
-// example: app.use(express.static(REACT_BUILD_DIR));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "build");
 
+//initialize instance of express and assign port
+const app = express();
 const PORT = process.env.PORT || 8080;
+//Middleware
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(REACT_BUILD_DIR));
 
-//refer to example above (build), will be used together for deploying app to render.com?
-//example: app.get('/', (req, res) => {
-//res.json({ message: 'Hello use this later' });
-//res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
-// });
-
+//Creates an endpoint for the route /api
+app.get("/", (req, res) => {
+  //res.json({ message: 'Hello from My template ExpressJS' });
+  res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
+});
 //Requests User Auth from Spotify
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+
 //Generates a random string containing numbers and letters for security reasons to use in Login handler
 const generateRandomString = (length) => {
   let text = "";

@@ -16,6 +16,7 @@ server/node_modules/
 server/.env
 # Ignore miscellaneous files (e.g., macOS .DS_Store files)
 .DS_Store
-
+#Ignore Build Folder
+client/dist
 #Production
 /build

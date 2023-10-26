@@ -8,17 +8,18 @@ import querystring from "querystring";
 import axios from "axios";
 
 const app = express();
+///Users/cristina/src/2022H2TemplateFinal/client/build
 // const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 // app.use(express.static(REACT_BUILD_DIR));
 
 const PORT = process.env.PORT || 8080;
-// Configuring cors middleware
 app.use(cors());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//for BUILD, creates an endpoint for the route /api
-// app.get('/api', (req, res) => {
+//for BUILD
+// ?? creates an endpoint for the route /api
+// app.get('/', (req, res) => {
 //res.json({ message: 'Hello from My template ExpressJS' });
 //   res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 // });
@@ -44,7 +45,7 @@ app.get("/login", (req, res) => {
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-//exchange the authorization code for an access token by sending a POST request to the /api/token endpoint.
+//Exchanges the auth code for an access token by sending a POST request to the /api/token endpoint from Spotify
 app.get("/callback", (req, res) => {
   const code = req.query.code || null;
 
@@ -65,7 +66,20 @@ app.get("/callback", (req, res) => {
   })
     .then((response) => {
       if (response.status === 200) {
-        res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
+        const { access_token, token_type } = response.data;
+
+        axios
+          .get("https://api.spotify.com/v1/me", {
+            headers: {
+              Authorization: `${token_type} ${access_token}`,
+            },
+          })
+          .then((response) => {
+            res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
+          })
+          .catch((error) => {
+            res.send(error);
+          });
       } else {
         res.send(response);
       }

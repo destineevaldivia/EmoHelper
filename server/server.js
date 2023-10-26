@@ -8,20 +8,19 @@ import querystring from "querystring";
 import axios from "axios";
 
 const app = express();
-///Users/cristina/src/2022H2TemplateFinal/client/build
-// const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
-// app.use(express.static(REACT_BUILD_DIR));
+///example: Users/cristina/src/2022H2TemplateFinal/client/build
+// example:const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
+// example: app.use(express.static(REACT_BUILD_DIR));
 
 const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//for BUILD
-// ?? creates an endpoint for the route /api
-// app.get('/', (req, res) => {
-//res.json({ message: 'Hello from My template ExpressJS' });
-//   res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+//refer to example above (build), will be used together for deploying app to render.com?
+//example: app.get('/', (req, res) => {
+//res.json({ message: 'Hello use this later' });
+//res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
 // });
 
 // Requests User Auth from Spotify
@@ -67,7 +66,6 @@ app.get("/callback", (req, res) => {
     .then((response) => {
       if (response.status === 200) {
         const { access_token, token_type } = response.data;
-
         axios
           .get("https://api.spotify.com/v1/me", {
             headers: {
@@ -88,6 +86,32 @@ app.get("/callback", (req, res) => {
       res.send(error);
     });
 });
+
+//Refreshes Spotify token, since it expires after 3600 seconds
+// app.get("/refresh_token", (req, res) => {
+//   const { refresh_token } = req.query;
+
+//   axios({
+//     method: "post",
+//     url: "https://accounts.spotify.com/api/token",
+//     data: querystring.stringify({
+//       grant_type: "refresh_token",
+//       refresh_token: refresh_token,
+//     }),
+//     headers: {
+//       "content-type": "application/x-www-form-urlencoded",
+//       Authorization: `Basic ${Buffer.from(
+//         `${CLIENT_ID}:${CLIENT_SECRET}`
+//       ).toString("base64")}`,
+//     },
+//   })
+//     .then((response) => {
+//       res.send(response.data);
+//     })
+//     .catch((error) => {
+//       res.send(error);
+//     });
+// });
 
 app.listen(PORT, () =>
   console.log(`Server running on Port http://localhost:${PORT}`)

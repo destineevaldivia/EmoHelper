@@ -5,10 +5,12 @@ import path from "path";
 import "dotenv/config";
 // import db from "./db/db-connection.js";
 import querystring from "querystring";
+import axios from "axios";
 
 const app = express();
 // const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
 // app.use(express.static(REACT_BUILD_DIR));
+
 const PORT = process.env.PORT || 8080;
 // Configuring cors middleware
 app.use(cors());
@@ -40,6 +42,10 @@ app.get("/login", (req, res) => {
   });
 
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
+});
+
+app.get("/callback", (req, res) => {
+  res.send("callback");
 });
 
 app.listen(PORT, () =>

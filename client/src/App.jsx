@@ -1,23 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { accessToken } from "./components/Spotify";
 
 function App() {
-  useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const accessToken = urlParams.get("access_token");
-    const refreshToken = urlParams.get("refresh_token");
+  const [token, setToken] = useState(null);
 
-    console.log("accessToken", accessToken);
-    console.log("refreshToken", refreshToken);
+  useEffect(() => {
+    setToken(accessToken);
   }, []);
 
   return (
     <>
       <div>
         <h1>EmoHelper app coming soon</h1>
-        <a className="App-link" href="http://localhost:8080/login">
-          Login using Spotify
-        </a>
+        {!token ? (
+          <a className="App-link" href="http://localhost:8080/login">
+            Login using Spotify
+          </a>
+        ) : (
+          <h3>You are logged in!</h3>
+        )}
       </div>
     </>
   );

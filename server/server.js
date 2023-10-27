@@ -43,7 +43,8 @@ const generateRandomString = (length) => {
 };
 const stateKey = "spotify_auth_state";
 
-//Login handler for logging into Spotify
+//Requests authorization from Spotify for specific scope access
+//Spotify authorizes and gives me an Auth Code
 app.get("/login", (req, res) => {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
@@ -61,8 +62,7 @@ app.get("/login", (req, res) => {
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-//Exchanges the auth code for an access token by sending a POST request to the /api/token endpoint from Spotify
-//Then retrieves user spotify details
+//Exchanges the auth code for an Access Token
 app.get("/callback", (req, res) => {
   const code = req.query.code || null;
 
@@ -81,6 +81,7 @@ app.get("/callback", (req, res) => {
       ).toString("base64")}`,
     },
   })
+    //Use access token to request data from Spotify API
     .then((response) => {
       if (response.status === 200) {
         const { access_token, token_type } = response.data;

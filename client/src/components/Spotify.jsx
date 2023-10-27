@@ -1,3 +1,5 @@
+import axios from "axios";
+
 //Placing all spotify related logic here
 const getAccessToken = () => {
   const queryString = window.location.search;
@@ -14,7 +16,7 @@ const getAccessToken = () => {
 };
 export const accessToken = getAccessToken();
 
-//Created Axios request headers so we can keep HTTP requests neat
+// Created axios global headers to keep HTTP requests DRY
 axios.defaults.baseURL = "https://api.spotify.com/v1";
 axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
 axios.defaults.headers["Content-Type"] = "application/json";

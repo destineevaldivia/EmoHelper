@@ -82,23 +82,17 @@ app.get("/callback", (req, res) => {
     },
   })
     //Use access token to request data from Spotify API
+    //destructuring the response.data to use in my queryParams
     .then((response) => {
       if (response.status === 200) {
-        const { access_token, token_type } = response.data;
-        axios
-          .get("https://api.spotify.com/v1/me", {
-            headers: {
-              Authorization: `${token_type} ${access_token}`,
-            },
-          })
-          .then((response) => {
-            res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
-          })
-          .catch((error) => {
-            res.send(error);
-          });
+        const { access_token, refresh_token } = response.data;
+        const queryParams = querystring.stringify({
+          access_token,
+          refresh_token,
+        });
+        res.redirect(`http://localhost:5173/?${queryParams}`);
       } else {
-        res.send(response);
+        res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
       }
     })
     .catch((error) => {

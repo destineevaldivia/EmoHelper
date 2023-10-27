@@ -82,7 +82,7 @@ app.get("/callback", (req, res) => {
     },
   })
     //Use access token to request data from Spotify API
-    //destructuring the response.data to use in my queryParams
+    //Destructuring the response.data to use in my queryParams, passing auth token to our front end
     .then((response) => {
       if (response.status === 200) {
         const { access_token, refresh_token } = response.data;

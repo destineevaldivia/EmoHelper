@@ -7,21 +7,26 @@ const getAccessToken = () => {
   const accessToken = urlParams.get("access_token");
   const refreshToken = urlParams.get("refresh_token");
 
-  console.log("accessToken", accessToken);
-  console.log("refreshToken", refreshToken);
   console.log("querystr", queryString);
   console.log("urlparams", urlParams);
+  console.log("accessToken", accessToken);
+  console.log("refreshToken", refreshToken);
 
   return accessToken;
 };
 export const accessToken = getAccessToken();
 
-// Created axios global headers to keep HTTP requests DRY
+// Created axios custom global headers to keep HTTP requests DRY
 axios.defaults.baseURL = "https://api.spotify.com/v1";
 axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
 axios.defaults.headers["Content-Type"] = "application/json";
 
-/*Get Tracks' Audio Features
+/*Get req to Spotify endpoint (Get User's Saved Tracks)
+https://developer.spotify.com/documentation/web-api/reference/get-users-saved-tracks
+
+Get req to Spotify endpoint (Get Tracks' Audio Features)
 https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features
 */
-export const getTracksAudioFeatures = () => axios.get("/audio-features");
+// export const getTracksAudioFeatures = () => axios.get("/audio-features");
+
+export const getUsersSavedTracks = () => axios.get("/me/tracks");

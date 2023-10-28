@@ -20,3 +20,8 @@ server/.env
 client/dist
 #Production
 /build
+
+#others
+render.yaml
+package-lock.json
+package.json

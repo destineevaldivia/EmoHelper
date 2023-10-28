@@ -79,7 +79,7 @@ app.get("/callback", (req, res) => {
       ).toString("base64")}`,
     },
   })
-    //Destructuring the response.data to pass auth token from BE to our FE in queryParams
+    //Destructuring the response.data to pass auth token from BE to our FE in URL queryParams
     .then((response) => {
       if (response.status === 200) {
         const { access_token, refresh_token } = response.data;

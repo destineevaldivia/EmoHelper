@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import { accessToken, getTracksAudioFeatures } from "./components/Spotify";
+import { accessToken, getUsersSavedTracks } from "./components/Spotify";
 
 //imports the accessToken from Spotify.jsx
 //uses token state to conditionally render login button
 function App() {
   const [token, setToken] = useState(null);
-  const [track, setTrack] = useState(null);
+  const [savedTracks, setSavedTracks] = useState(null);
 
   useEffect(() => {
     setToken(accessToken);
 
+    //imported getUsersSavedTracks fxn
     const fetchData = async () => {
       try {
-        const { data } = await getTracksAudioFeatures();
-        setTrack(data);
+        const { data } = await getUsersSavedTracks();
+        console.log("saved tracks data", data);
+        setSavedTracks(data);
       } catch (e) {
         console.error(e);
       }

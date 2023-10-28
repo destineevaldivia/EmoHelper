@@ -1,6 +1,7 @@
 import axios from "axios";
 
-//Placing all spotify related logic here
+/** Placing all spotify related logic below **/
+
 const getAccessToken = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -21,11 +22,6 @@ axios.defaults.baseURL = "https://api.spotify.com/v1";
 axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
 axios.defaults.headers["Content-Type"] = "application/json";
 
-//Get req to Spotify endpoint (Get Tracks' Audio Features)
-//https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features
-
-//export const getTracksAudioFeatures = () => axios.get("/audio-features");
-
 /*Get req to Spotify endpoint (Get User's Saved Tracks)
 https://developer.spotify.com/documentation/web-api/reference/get-users-saved-tracks */
 export const getUsersSavedTracks = () => {
@@ -39,3 +35,8 @@ export const getUsersSavedTracks = () => {
     },
   });
 };
+
+/*Get req to Spotify endpoint (Get Tracks' Audio Features)
+https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features */
+
+export const getTracksAudioFeatures = () => axios.get("/audio-features");

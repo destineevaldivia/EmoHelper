@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { accessToken, getUsersSavedTracks } from "./components/Spotify";
+import {
+  accessToken,
+  getUsersSavedTracks,
+  getTracksAudioFeatures,
+} from "./components/Spotify";
 
 //imports the accessToken from Spotify.jsx
 //uses token state to conditionally render login button
@@ -14,8 +18,9 @@ function App() {
     const fetchData = async () => {
       try {
         const { data } = await getUsersSavedTracks();
-        console.log("saved tracks data", data);
+        console.log("data fetched ", data);
         setSavedTracks(data);
+        console.log("savedTracks state variable is", savedTracks);
       } catch (e) {
         console.error(e);
       }

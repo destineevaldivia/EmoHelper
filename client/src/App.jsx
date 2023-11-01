@@ -4,6 +4,7 @@ import {
   getUsersSavedTracks,
   getTracksAudioFeatures,
 } from "./SpotifyApi";
+import EmotionForm from "./components/EmotionForm";
 
 //import the accessToken from Spotify.jsx
 //use token state to conditionally render login button
@@ -34,13 +35,18 @@ function App() {
   return (
     <>
       <div>
-        <h1>EmoHelper app coming soon</h1>
+        <h1 className="App-title">EmoHelper app coming soon</h1>
         {!token ? (
           <a className="App-link" href="http://localhost:8080/login">
             <button>Log in using Spotify</button>
           </a>
         ) : (
-          <h3>You are logged in!</h3>
+          <div>
+            <p>You are logged in!</p>
+            <div className="emo-form-container">
+              <EmotionForm audioFeatures={audioFeatures} />
+            </div>
+          </div>
         )}
       </div>
     </>

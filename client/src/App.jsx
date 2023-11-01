@@ -5,16 +5,16 @@ import {
   getTracksAudioFeatures,
 } from "./SpotifyApi";
 
-//imports the accessToken from Spotify.jsx
-//uses token state to conditionally render login button
+//import the accessToken from Spotify.jsx
+//use token state to conditionally render login button
 function App() {
   const [token, setToken] = useState(null);
   const [savedTracks, setSavedTracks] = useState(null);
+  const [audioFeatures, setAudioFeatures] = useState(null);
 
   useEffect(() => {
     setToken(accessToken);
 
-    //imported getUsersSavedTracks fxn
     const fetchData = async () => {
       try {
         const { data } = await getUsersSavedTracks();
@@ -26,6 +26,7 @@ function App() {
     fetchData();
   }, []);
   console.log("savedTracks state successfully updated ", savedTracks);
+
   return (
     <>
       <div>

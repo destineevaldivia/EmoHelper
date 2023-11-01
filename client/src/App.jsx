@@ -3,7 +3,7 @@ import {
   accessToken,
   getUsersSavedTracks,
   getTracksAudioFeatures,
-} from "./components/Spotify";
+} from "./SpotifyApi";
 
 //imports the accessToken from Spotify.jsx
 //uses token state to conditionally render login button

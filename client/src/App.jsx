@@ -19,6 +19,9 @@ function App() {
       try {
         const { data } = await getUsersSavedTracks();
         setSavedTracks(data);
+
+        const audioFeaturesData = await getTracksAudioFeatures(data);
+        setAudioFeatures(audioFeaturesData);
       } catch (e) {
         console.error(e);
       }
@@ -26,6 +29,7 @@ function App() {
     fetchData();
   }, []);
   console.log("savedTracks state successfully updated ", savedTracks);
+  console.log("audiofeatures state successfully updated ", audioFeatures);
 
   return (
     <>

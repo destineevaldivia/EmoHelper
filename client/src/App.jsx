@@ -18,16 +18,14 @@ function App() {
     const fetchData = async () => {
       try {
         const { data } = await getUsersSavedTracks();
-        console.log("data fetched ", data);
         setSavedTracks(data);
-        console.log("savedTracks state variable is", savedTracks);
       } catch (e) {
         console.error(e);
       }
     };
     fetchData();
   }, []);
-
+  console.log("savedTracks state successfully updated ", savedTracks);
   return (
     <>
       <div>

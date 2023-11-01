@@ -1,6 +1,6 @@
 import axios from "axios";
 
-/** Placing all spotify related logic below **/
+/** Place all spotify api related logic here **/
 
 const getAccessToken = () => {
   const queryString = window.location.search;
@@ -17,7 +17,7 @@ const getAccessToken = () => {
 };
 export const accessToken = getAccessToken();
 
-// Created axios custom global headers to keep HTTP requests DRY
+// Create axios custom global headers to keep HTTP requests DRY
 axios.defaults.baseURL = "https://api.spotify.com/v1";
 axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
 axios.defaults.headers["Content-Type"] = "application/json";
@@ -39,4 +39,20 @@ export const getUsersSavedTracks = () => {
 /*Get req to Spotify endpoint (Get Tracks' Audio Features)
 https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features */
 
-export const getTracksAudioFeatures = () => axios.get("/audio-features");
+export const getTracksAudioFeatures = (savedTracks) => {
+  // Extract the track IDs from the savedTracks state variable that was imported
+  const trackIds = savedTracks.items.map((item) => item.track.id);
+  // Create a string of track IDs to use in GET req to api /audio features
+  const trackIdsString = trackIds.join(",");
+
+  return axios
+    .get(`/audio-features?ids=${trackIdsString}`)
+    .then((response) => {
+      const audioFeaturesData = response.data; // This is the audio features data
+      return audioFeaturesData;
+    })
+    .catch((error) => {
+      console.error("Error fetching audio features from spotifyApi:", error);
+      throw error;
+    });
+};

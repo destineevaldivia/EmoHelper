@@ -134,7 +134,7 @@ app.get("/getValence", async (req, res) => {
     // If there's a result, rows[0] should contain the valence score
     if (rows.length > 0) {
       const valence = rows[0].valence;
-      res.json({ valence });
+      res.json({ valence }); //send valence as a json response to the client side
     } else {
       res
         .status(404)

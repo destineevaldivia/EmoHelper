@@ -3,10 +3,10 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import db from "./db/db-connections.js";
 import "dotenv/config";
 import querystring from "querystring";
 import axios from "axios";
-//import db from "./db/db-connection.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -21,16 +21,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(REACT_BUILD_DIR));
 
-//Serves static webpage
+//Serve static webpage
 app.get("/", (req, res) => {
   res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
 
-//Defining variables that store sensitive information
+//Define variables that store sensitive information
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
-//Generates a random string containing numbers and letters for security reasons to use in Login handler
+//Generate a random string containing numbers and letters for security reasons to use in Login handler
 const generateRandomString = (length) => {
   let text = "";
   const possible =
@@ -41,7 +41,7 @@ const generateRandomString = (length) => {
   return text;
 };
 
-//Requests User Auth from Spotify and specific scope access
+//Request User Auth from Spotify and specific scope access
 const stateKey = "spotify_auth_state";
 app.get("/login", (req, res) => {
   const state = generateRandomString(16);
@@ -60,7 +60,7 @@ app.get("/login", (req, res) => {
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-//Exchanges the auth code for an Access Token
+//Exchange the auth code for an Access Token
 app.get("/callback", (req, res) => {
   const code = req.query.code || null;
 
@@ -79,7 +79,7 @@ app.get("/callback", (req, res) => {
       ).toString("base64")}`,
     },
   })
-    //Destructuring the response.data to pass auth token from BE to our FE in URL queryParams
+    //Destructure the response.data to pass auth token from BE to our FE in URL queryParams
     .then((response) => {
       if (response.status === 200) {
         const { access_token, refresh_token } = response.data;
@@ -97,7 +97,7 @@ app.get("/callback", (req, res) => {
     });
 });
 
-//Refreshes Spotify token, since it expires after 3600 seconds
+//Refresh Spotify token, since it expires after 3600 seconds
 app.get("/refresh_token", (req, res) => {
   const { refresh_token } = req.query;
 
@@ -121,6 +121,29 @@ app.get("/refresh_token", (req, res) => {
     .catch((error) => {
       res.send(error);
     });
+});
+
+//GET req from 'EmoMap' table in my 'emohelper_db' psql database for valence score
+app.get("/getValence", async (req, res) => {
+  const selectedEmotion = req.query.emotion;
+  try {
+    // query to retrieve the valence score
+    const query = "SELECT valence FROM EmoMap WHERE emotion = $1";
+    const { rows } = await db.query(query, [selectedEmotion]);
+
+    // If there's a result, rows[0] should contain the valence score
+    if (rows.length > 0) {
+      const valence = rows[0].valence;
+      res.json({ valence });
+    } else {
+      res
+        .status(404)
+        .json({ error: "Valence score not found for the selected emotion" });
+    }
+  } catch (error) {
+    console.error("Error fetching valence from the database:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 app.listen(PORT, () =>

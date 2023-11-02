@@ -123,9 +123,10 @@ app.get("/refresh_token", (req, res) => {
     });
 });
 
-//GET req from 'EmoMap' table in my 'emohelper_db' psql database for valence score
+//GET req from 'EmoMap' table in my 'emohelper_db' psql database for valence score based on the provided 'emotion' query parameter
 app.get("/getValence", async (req, res) => {
   const selectedEmotion = req.query.emotion;
+
   try {
     // query to retrieve the valence score
     const query = "SELECT valence FROM EmoMap WHERE emotion = $1";
@@ -142,7 +143,7 @@ app.get("/getValence", async (req, res) => {
     }
   } catch (error) {
     console.error("Error fetching valence from the database:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: error });
   }
 });
 

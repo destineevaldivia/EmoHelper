@@ -18,9 +18,9 @@ const getAccessToken = () => {
 export const accessToken = getAccessToken();
 
 // Create axios custom global headers to keep HTTP requests DRY
-axios.defaults.baseURL = "https://api.spotify.com/v1";
-axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
-axios.defaults.headers["Content-Type"] = "application/json";
+// axios.defaults.baseURL = "https://api.spotify.com/v1";
+// axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
+// axios.defaults.headers["Content-Type"] = "application/json";
 
 /*Get req to Spotify endpoint (Get User's Saved Tracks)
 https://developer.spotify.com/documentation/web-api/reference/get-users-saved-tracks */
@@ -29,6 +29,11 @@ export const getUsersSavedTracks = () => {
   const randomOffset = Math.floor(Math.random() * 500);
 
   return axios.get("/me/tracks", {
+    baseURL: "https://api.spotify.com/v1",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
     params: {
       limit: 50,
       offset: randomOffset,
@@ -46,7 +51,13 @@ export const getTracksAudioFeatures = (savedTracks) => {
   const trackIdsString = trackIds.join(",");
 
   return axios
-    .get(`/audio-features?ids=${trackIdsString}`)
+    .get(`/audio-features?ids=${trackIdsString}`, {
+      baseURL: "https://api.spotify.com/v1",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    })
     .then((response) => {
       const audioFeaturesData = response.data; // This is the audio features data
       return audioFeaturesData;

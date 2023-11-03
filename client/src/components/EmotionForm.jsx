@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import DisplayTracks from "./DisplayTracks";
 
-const EmotionForm = () => {
+const EmotionForm = ({ savedTracks, audioFeatures }) => {
   const emotions = [
     "desperation",
     "grief",
@@ -26,6 +27,7 @@ const EmotionForm = () => {
   ];
 
   const [selectedEmotion, setSelectedEmotion] = useState("");
+  const [valenceScore, setValenceScore] = useState("");
 
   const handleEmotionChange = (event) => {
     //update selectedEmotion state, triggered by onChange event in form
@@ -39,7 +41,7 @@ const EmotionForm = () => {
       })
       .then((response) => {
         const valence = response.data; //store the response, valence score, from the server
-        //*** wip- use valence to filter through the spotify features api
+        setValenceScore(valence);
       })
       .catch((error) => {
         console.log("Error getting valence:", error);
@@ -50,6 +52,7 @@ const EmotionForm = () => {
     event.preventDefault();
     console.log("Selected Emotion:", selectedEmotion);
   };
+  console.log(valenceScore);
 
   return (
     <div>
@@ -70,6 +73,23 @@ const EmotionForm = () => {
         ))}
         <button type="submit">Submit</button>
       </form>
+
+      {selectedEmotion ? (
+        <div>
+          <h4>
+            Click submit to find a song from your personal spotify library that
+            matches your emotional state!
+          </h4>
+          <div className="emo-form-container">
+            <DisplayTracks
+              selectedEmotion={selectedEmotion}
+              valenceScore={valenceScore}
+              savedTracks={savedTracks}
+              audioFeatures={audioFeatures}
+            />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

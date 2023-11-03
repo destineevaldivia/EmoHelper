@@ -1,7 +1,10 @@
-const DisplayTracks = () => {
+const DisplayTracks = ({ audioFeatures, selectedEmotion, valenceScore }) => {
+  console.log("in displaytracks audiofeature", audioFeatures);
+  console.log("in displaytracks emo", selectedEmotion);
+  console.log("in display tracks valencescore", valenceScore);
   return (
     <div>
-      <p> test</p>
+      <p>hold</p>
     </div>
   );
 };

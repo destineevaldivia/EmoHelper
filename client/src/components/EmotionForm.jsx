@@ -28,6 +28,11 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
 
   const [selectedEmotion, setSelectedEmotion] = useState("");
   const [valenceScore, setValenceScore] = useState("");
+  const [formData, setFormData] = useState({
+    selected_track: "",
+    user_emotion: "",
+    decision: "",
+  });
 
   const handleEmotionChange = (event) => {
     //update selectedEmotion state, triggered by onChange event in form
@@ -71,7 +76,6 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
             </label>
           </div>
         ))}
-        <button type="submit">Submit</button>
       </form>
 
       {selectedEmotion ? (
@@ -84,6 +88,8 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
               savedTracks={savedTracks}
             />
           </div>
+
+          <button type="submit">Submit</button>
         </div>
       ) : null}
     </div>

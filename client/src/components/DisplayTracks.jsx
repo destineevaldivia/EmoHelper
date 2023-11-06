@@ -41,9 +41,9 @@ const DisplayTracks = ({
     <>
       <div>
         <h3>
-          Which of these two tracks from your Spotify library best describes how
-          you're feeling?
+          Which of these two tracks from best describes how you're feeling?
         </h3>
+        <p>Click link to listen to the song on Spotify</p>
         <ol>
           {matchedTracks.map((track) => (
             <li key={track.id}>

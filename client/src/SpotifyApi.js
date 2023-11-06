@@ -17,11 +17,6 @@ const getAccessToken = () => {
 };
 export const accessToken = getAccessToken();
 
-// Create axios custom global headers to keep HTTP requests DRY
-// axios.defaults.baseURL = "https://api.spotify.com/v1";
-// axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
-// axios.defaults.headers["Content-Type"] = "application/json";
-
 /*Get req to Spotify endpoint (Get User's Saved Tracks)
 https://developer.spotify.com/documentation/web-api/reference/get-users-saved-tracks */
 export const getUsersSavedTracks = () => {

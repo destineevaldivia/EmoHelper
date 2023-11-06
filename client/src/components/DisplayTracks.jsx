@@ -28,22 +28,31 @@ const DisplayTracks = ({
     .map((item) => item.track);
   console.log("Closest tracks:", closestTracks);
 
+  //map over closestTracks and use the find method to look for a matching track in SavedTracks object, so I can render the properties of this object
+  const matchedTracks = closestTracks.map((track) => {
+    const matchingSavedTrack = savedTracks.items.find(
+      (savedTrack) => savedTrack.track.id === track.id
+    );
+    if (matchingSavedTrack) {
+      return matchingSavedTrack.track;
+    }
+  });
   return (
     <>
       <div>
-        <h2>
+        <h3>
           Which of these two tracks from your Spotify library best describes how
           you're feeling?
-        </h2>
-        <ul>
-          {closestTracks.map((track) => (
+        </h3>
+        <ol>
+          {matchedTracks.map((track) => (
             <li key={track.id}>
-              <a href={track.track_href} target="_blank">
-                {track.track_href}
+              <a href={track.external_urls.spotify} target="_blank">
+                {track.name}
               </a>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </>
   );

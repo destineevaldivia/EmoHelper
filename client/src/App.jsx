@@ -44,7 +44,10 @@ function App() {
           <div>
             <p>You are logged in!</p>
             <div className="emo-form-container">
-              <EmotionForm audioFeatures={audioFeatures} />
+              <EmotionForm
+                audioFeatures={audioFeatures}
+                savedTracks={savedTracks}
+              />
             </div>
           </div>
         )}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import DisplayTracks from "./DisplayTracks";
 
-const EmotionForm = ({ savedTracks, audioFeatures }) => {
+const EmotionForm = ({ audioFeatures, savedTracks }) => {
   const emotions = [
     "desperation",
     "grief",
@@ -40,8 +40,8 @@ const EmotionForm = ({ savedTracks, audioFeatures }) => {
         params: { emotion: event.target.value }, //include selected emotion in the query
       })
       .then((response) => {
-        const valence = response.data; //store the response, valence score, from the server
-        setValenceScore(valence);
+        const valence = response.data; //store the response.data in a const, valence score
+        setValenceScore(valence); //update valenceScore state
       })
       .catch((error) => {
         console.log("Error getting valence:", error);
@@ -84,8 +84,8 @@ const EmotionForm = ({ savedTracks, audioFeatures }) => {
             <DisplayTracks
               selectedEmotion={selectedEmotion}
               valenceScore={valenceScore}
-              savedTracks={savedTracks}
               audioFeatures={audioFeatures}
+              savedTracks={savedTracks}
             />
           </div>
         </div>

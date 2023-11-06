@@ -76,10 +76,6 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
 
       {selectedEmotion ? (
         <div>
-          <h4>
-            Click submit to find a song from your personal spotify library that
-            matches your emotional state!
-          </h4>
           <div className="emo-form-container">
             <DisplayTracks
               selectedEmotion={selectedEmotion}

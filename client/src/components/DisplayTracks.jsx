@@ -5,6 +5,7 @@ const DisplayTracks = ({
   selectedEmotion,
   valenceScore,
   savedTracks,
+  updateSelectedTrack,
 }) => {
   console.log("in displaytracks audiofeature", audioFeatures);
   console.log("in displaytracks emo", selectedEmotion);
@@ -37,22 +38,29 @@ const DisplayTracks = ({
       return matchingSavedTrack.track;
     }
   });
+
+  const handleUserChoice = (chosenTrack) => {
+    updateSelectedTrack(chosenTrack);
+    console.log("chosen track", chosenTrack);
+  };
+
   return (
     <>
       <div>
-        <h3>
-          Which of these two tracks from best describes how you're feeling?
-        </h3>
+        <h3>Which of these two tracks best describes how you're feeling?</h3>
         <p>Click link to listen to the song on Spotify</p>
-        <ol>
+        <ul>
           {matchedTracks.map((track) => (
             <li key={track.id}>
               <a href={track.external_urls.spotify} target="_blank">
                 {track.name}
               </a>
+              <button onClick={() => handleUserChoice(track.name)}>
+                Choose this track
+              </button>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </>
   );

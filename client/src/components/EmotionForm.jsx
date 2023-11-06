@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import DisplayTracks from "./DisplayTracks";
+import Decision from "./Decision";
 
 const EmotionForm = ({ audioFeatures, savedTracks }) => {
   const emotions = [
@@ -53,6 +54,14 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       });
   };
 
+  //Function to update the formData state with the user's choice of track and..
+  const updateSelectedTrack = (chosenTrack) => {
+    setFormData({
+      ...formData,
+      selected_track: chosenTrack,
+    });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("Selected Emotion:", selectedEmotion);
@@ -86,8 +95,11 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
               valenceScore={valenceScore}
               audioFeatures={audioFeatures}
               savedTracks={savedTracks}
+              updateSelectedTrack={updateSelectedTrack}
             />
           </div>
+
+          <Decision />
 
           <button type="submit">Submit</button>
         </div>

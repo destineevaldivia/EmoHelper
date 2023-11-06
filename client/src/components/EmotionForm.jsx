@@ -86,10 +86,9 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
           </div>
         ))}
       </form>
-
       {selectedEmotion ? (
         <div>
-          <div className="emo-form-container">
+          <div className="track-form-container">
             <DisplayTracks
               selectedEmotion={selectedEmotion}
               valenceScore={valenceScore}
@@ -98,12 +97,14 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
               updateSelectedTrack={updateSelectedTrack}
             />
           </div>
-
-          <Decision />
-
-          <button type="submit">Submit</button>
         </div>
       ) : null}
+      {formData.selected_track ? (
+        <div>
+          <Decision />
+        </div>
+      ) : null}
+      <button type="submit">Submit</button>
     </div>
   );
 };

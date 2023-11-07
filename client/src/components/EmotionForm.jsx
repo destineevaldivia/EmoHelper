@@ -82,7 +82,9 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
   const handleSubmitForm = (event) => {
     event.preventDefault();
     axios
-      .post("/postEntry", formData)
+      .post("/postEntry", formData, {
+        baseURL: "http://localhost:8080",
+      })
       .then((response) => {
         console.log("Emo entry created successfully");
         //imported success messaging with toast

@@ -85,7 +85,11 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       .post("/postEntry", formData)
       .then((response) => {
         console.log("Emo entry created successfully");
-        // ...wip.. create a success message
+        //impoted success messaging with toast
+        toast.success("Your Emo entry was created successfully!", {
+          position: "top-center",
+          autoClose: 3000, // Close the toast after 3 seconds
+        });
       })
       .catch((error) => {
         console.error("Error creating Emo entry:", error);
@@ -131,7 +135,7 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       {decision ? (
         <div>
           <EmoEntry formData={formData} />
-          <button type="submit" onSubmit={handleSubmitForm}>
+          <button type="submit" onClick={handleSubmitForm}>
             Create Emo entry
           </button>
         </div>

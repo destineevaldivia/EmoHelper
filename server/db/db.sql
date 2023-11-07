@@ -41,6 +41,6 @@ CREATE TABLE EmoEntries (
   decision VARCHAR (25) NOT NULL
 );
 
-INSERT INTO EmoEntries (id, created_at, selected_track, user_emotion, decision ) {
+INSERT INTO EmoEntries (selected_track, user_emotion, decision ) {
 ...
 }

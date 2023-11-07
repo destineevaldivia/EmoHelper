@@ -5,8 +5,9 @@ import {
   getTracksAudioFeatures,
 } from "./SpotifyApi";
 import EmotionForm from "./components/EmotionForm";
+import { ToastContainer } from "react-toastify";
 
-//import the accessToken from Spotify.jsx
+//import the accessToken and utility functions from SpotifyApi.js file
 //use token state to conditionally render login button
 function App() {
   const [token, setToken] = useState(null);
@@ -52,6 +53,7 @@ function App() {
           </div>
         )}
       </div>
+      <ToastContainer />
     </>
   );
 }

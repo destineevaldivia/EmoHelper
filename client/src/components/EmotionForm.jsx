@@ -6,6 +6,10 @@ import EmoEntry from "./EmoEntry";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+/* functional component will: facilitate the selection of emotions, tracks, and decisions,
+communicate with the server to fetch valence score,
+create entries in database. */
+
 const EmotionForm = ({ audioFeatures, savedTracks }) => {
   const emotions = [
     "desperation",
@@ -29,7 +33,7 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
     "enthusiasm",
     "ecstasy",
   ];
-  //initialize states
+  //initialize state to manage user selection and formData
   const [selectedEmotion, setSelectedEmotion] = useState("");
   const [valenceScore, setValenceScore] = useState("");
   const [decision, setDecision] = useState("");
@@ -40,14 +44,15 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
   });
 
   const handleEmotionChange = (event) => {
-    //update selectedEmotion state, triggered by onChange event in form
+    //update selectedEmotion state, triggered by onChange event in emotion form
     setSelectedEmotion(event.target.value);
+    //update formData state
     setFormData({
       ...formData,
       user_emotion: event.target.value,
     });
 
-    //Make a GET req to express.js server to get the valence score
+    //Make a GET req to express.js server to fetch valence score based on selected emotion
     axios
       .get("/getValence", {
         baseURL: "http://localhost:8080",
@@ -78,7 +83,9 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       decision: newDecision,
     });
   };
-  //Handle submit formData and make POST req to the database on the server side
+
+  //Invoked when user submits the form
+  //send POST req to server with formData
   const handleSubmitForm = (event) => {
     event.preventDefault();
     axios

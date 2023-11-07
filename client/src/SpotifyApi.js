@@ -40,7 +40,7 @@ export const getUsersSavedTracks = () => {
 https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features */
 
 export const getTracksAudioFeatures = (savedTracks) => {
-  // Extract the track IDs from the savedTracks state variable that was imported
+  // Extract the track IDs from the savedTracks state variable
   const trackIds = savedTracks.items.map((item) => item.track.id);
   // Create a string of track IDs to use in GET req to api /audio features
   const trackIdsString = trackIds.join(",");

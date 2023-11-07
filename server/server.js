@@ -147,6 +147,25 @@ app.get("/getValence", async (req, res) => {
   }
 });
 
+//POST req to 'EmoEntries' table from 'emohelper_db' database
+app.post("/postEntry", async (req, res) => {
+  try {
+    const newEntry = {
+      selected_track: req.body.selected_track,
+      user_emotion: req.body.user_emotion,
+      decision: req.body.decision,
+    };
+    const result = await db.query(
+      "INSERT INTO EmoEntries(selected_track, user_emotion, decision) VALUES($1, $2, $3)",
+      [newEntry.selected_track, newEntry.user_emotion, newEntry.decision]
+    );
+    res.send("Emo Entry posted successfully");
+  } catch (error) {
+    console.error("Error posting entry to the database:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.listen(PORT, () =>
   console.log(`Server running on Port http://localhost:${PORT}`)
 );

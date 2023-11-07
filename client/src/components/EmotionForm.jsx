@@ -3,6 +3,8 @@ import axios from "axios";
 import DisplayTracks from "./DisplayTracks";
 import Decision from "./Decision";
 import EmoEntry from "./EmoEntry";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EmotionForm = ({ audioFeatures, savedTracks }) => {
   const emotions = [
@@ -27,7 +29,7 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
     "enthusiasm",
     "ecstasy",
   ];
-
+  //initialize states
   const [selectedEmotion, setSelectedEmotion] = useState("");
   const [valenceScore, setValenceScore] = useState("");
   const [decision, setDecision] = useState("");
@@ -59,6 +61,7 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
         console.log("Error getting valence:", error);
       });
   };
+  console.log(valenceScore);
 
   //Function to update the formData state with the user's choice of track
   const updateSelectedTrack = (chosenTrack) => {
@@ -75,12 +78,19 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       decision: newDecision,
     });
   };
-
+  //Handle submit formData and make POST req to the database on the server side
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    // console.log("Selected Emotion:", selectedEmotion);
+    axios
+      .post("/postEntry", formData)
+      .then((response) => {
+        console.log("Emo entry created successfully");
+        // ...wip.. create a success message
+      })
+      .catch((error) => {
+        console.error("Error creating Emo entry:", error);
+      });
   };
-  console.log(valenceScore);
 
   return (
     <div>

@@ -85,7 +85,7 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       .post("/postEntry", formData)
       .then((response) => {
         console.log("Emo entry created successfully");
-        //impoted success messaging with toast
+        //imported success messaging with toast
         toast.success("Your Emo entry was created successfully!", {
           position: "top-center",
           autoClose: 3000, // Close the toast after 3 seconds

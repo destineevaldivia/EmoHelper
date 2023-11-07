@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import DisplayTracks from "./DisplayTracks";
 import Decision from "./Decision";
+import EmoEntry from "./EmoEntry";
 
 const EmotionForm = ({ audioFeatures, savedTracks }) => {
   const emotions = [
@@ -29,6 +30,7 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
 
   const [selectedEmotion, setSelectedEmotion] = useState("");
   const [valenceScore, setValenceScore] = useState("");
+  const [decision, setDecision] = useState("");
   const [formData, setFormData] = useState({
     selected_track: "",
     user_emotion: "",
@@ -38,6 +40,10 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
   const handleEmotionChange = (event) => {
     //update selectedEmotion state, triggered by onChange event in form
     setSelectedEmotion(event.target.value);
+    setFormData({
+      ...formData,
+      user_emotion: event.target.value,
+    });
 
     //Make a GET req to express.js server to get the valence score
     axios
@@ -54,11 +60,19 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       });
   };
 
-  //Function to update the formData state with the user's choice of track and..
+  //Function to update the formData state with the user's choice of track
   const updateSelectedTrack = (chosenTrack) => {
     setFormData({
       ...formData,
       selected_track: chosenTrack,
+    });
+  };
+  //Function to update the formData state with the user's decision as a string to either 'let it' go or 'embrace it'
+  const handleDecision = (newDecision) => {
+    setDecision(newDecision);
+    setFormData({
+      ...formData,
+      decision: newDecision,
     });
   };
 
@@ -101,10 +115,15 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       ) : null}
       {formData.selected_track ? (
         <div>
-          <Decision />
+          <Decision handleDecision={handleDecision} />
         </div>
       ) : null}
-      <button type="submit">Submit</button>
+      {decision ? (
+        <div>
+          <EmoEntry formData={formData} />
+          <button type="submit">Create Emo entry</button>
+        </div>
+      ) : null}
     </div>
   );
 };

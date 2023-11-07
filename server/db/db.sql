@@ -18,7 +18,7 @@ VALUES
 (0.25, 'loneliness'),
 (0.30, 'disappointment'),
 (0.35, 'frustration'),
-(0.40, 'gloominess');
+(0.40, 'gloominess'),
 (0.45, 'nervousness'),
 (0.50, 'anger'),
 (0.55, 'boredom'),

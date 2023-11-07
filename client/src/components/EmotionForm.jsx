@@ -76,16 +76,16 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmitForm = (event) => {
     event.preventDefault();
-    console.log("Selected Emotion:", selectedEmotion);
+    // console.log("Selected Emotion:", selectedEmotion);
   };
   console.log(valenceScore);
 
   return (
     <div>
       <h3>Which of these emotions do you want to focus on?</h3>
-      <form onSubmit={handleSubmit}>
+      <form>
         {emotions.map((emotion) => (
           <div key={emotion}>
             <label>
@@ -121,7 +121,9 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       {decision ? (
         <div>
           <EmoEntry formData={formData} />
-          <button type="submit">Create Emo entry</button>
+          <button type="submit" onSubmit={handleSubmitForm}>
+            Create Emo entry
+          </button>
         </div>
       ) : null}
     </div>

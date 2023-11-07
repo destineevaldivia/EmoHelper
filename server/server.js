@@ -3,8 +3,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
+import db from "./db/db-connections.js";
 import "dotenv/config";
-//import db from "./db/db-connection.js";
 import querystring from "querystring";
 import axios from "axios";
 
@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "build");
 
-//initialize instance of express and assign port
+//Initialize instance of express and assign port
 const app = express();
 const PORT = process.env.PORT || 8080;
 //Middleware
@@ -21,17 +21,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(REACT_BUILD_DIR));
 
-//Creates an endpoint for the route /api
+//Serve static webpage
 app.get("/", (req, res) => {
-  //res.json({ message: 'Hello from My template ExpressJS' });
   res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
-//Requests User Auth from Spotify
+
+//Define variables that store sensitive information
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
-
-//Generates a random string containing numbers and letters for security reasons to use in Login handler
+//Generate a random string containing numbers and letters for security reasons to use in Login handler
 const generateRandomString = (length) => {
   let text = "";
   const possible =
@@ -41,13 +40,14 @@ const generateRandomString = (length) => {
   }
   return text;
 };
-const stateKey = "spotify_auth_state";
 
-//Login handler for logging into Spotify
+//Request User Auth from Spotify and specific scope access
+const stateKey = "spotify_auth_state";
 app.get("/login", (req, res) => {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
-  const scope = "user-read-private user-read-email";
+  const scope =
+    "user-read-email playlist-read-private user-library-read user-top-read";
 
   const queryParams = querystring.stringify({
     client_id: CLIENT_ID,
@@ -56,12 +56,11 @@ app.get("/login", (req, res) => {
     state: state,
     scope: scope,
   });
-
+  //Receive the auth code and include it in queryParams
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-//Exchanges the auth code for an access token by sending a POST request to the /api/token endpoint from Spotify
-//Then retrieves user spotify details
+//Exchange the auth code for an Access Token
 app.get("/callback", (req, res) => {
   const code = req.query.code || null;
 
@@ -80,23 +79,17 @@ app.get("/callback", (req, res) => {
       ).toString("base64")}`,
     },
   })
+    //Destructure the response.data to pass auth token from BE to our FE in URL queryParams
     .then((response) => {
       if (response.status === 200) {
-        const { access_token, token_type } = response.data;
-        axios
-          .get("https://api.spotify.com/v1/me", {
-            headers: {
-              Authorization: `${token_type} ${access_token}`,
-            },
-          })
-          .then((response) => {
-            res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
-          })
-          .catch((error) => {
-            res.send(error);
-          });
+        const { access_token, refresh_token } = response.data;
+        const queryParams = querystring.stringify({
+          access_token,
+          refresh_token,
+        });
+        res.redirect(`http://localhost:5173/?${queryParams}`);
       } else {
-        res.send(response);
+        res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
       }
     })
     .catch((error) => {
@@ -104,7 +97,7 @@ app.get("/callback", (req, res) => {
     });
 });
 
-//Refreshes Spotify token, since it expires after 3600 seconds
+//Refresh Spotify token, since it expires after 3600 seconds
 app.get("/refresh_token", (req, res) => {
   const { refresh_token } = req.query;
 
@@ -128,6 +121,49 @@ app.get("/refresh_token", (req, res) => {
     .catch((error) => {
       res.send(error);
     });
+});
+
+//GET req from 'EmoMap' table in my 'emohelper_db' psql database for valence score based on the provided 'emotion' query parameter
+app.get("/getValence", async (req, res) => {
+  const selectedEmotion = req.query.emotion;
+
+  try {
+    // query to retrieve the valence score
+    const query = "SELECT valence FROM EmoMap WHERE emotion = $1";
+    const { rows } = await db.query(query, [selectedEmotion]);
+
+    // If there's a result, rows[0] should contain the valence score
+    if (rows.length > 0) {
+      const valence = rows[0].valence;
+      res.json({ valence }); //send valence as a json response to the client side
+    } else {
+      res
+        .status(404)
+        .json({ error: "Valence score not found for the selected emotion" });
+    }
+  } catch (error) {
+    console.error("Error fetching valence from the database:", error);
+    res.status(500).json({ error: error });
+  }
+});
+
+//POST req to 'EmoEntries' table from 'emohelper_db' database
+app.post("/postEntry", async (req, res) => {
+  try {
+    const newEntry = {
+      selected_track: req.body.selected_track,
+      user_emotion: req.body.user_emotion,
+      decision: req.body.decision,
+    };
+    const result = await db.query(
+      "INSERT INTO EmoEntries(selected_track, user_emotion, decision) VALUES($1, $2, $3)",
+      [newEntry.selected_track, newEntry.user_emotion, newEntry.decision]
+    );
+    res.send("Emo Entry posted successfully");
+  } catch (error) {
+    console.error("Error posting entry to the database:", error);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.listen(PORT, () =>

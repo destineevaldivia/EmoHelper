@@ -46,7 +46,7 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
   const handleEmotionChange = (event) => {
     //update selectedEmotion state, triggered by onChange event in emotion form
     setSelectedEmotion(event.target.value);
-    //update formData state
+    //update formData state of user_emotion
     setFormData({
       ...formData,
       user_emotion: event.target.value,
@@ -60,13 +60,12 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       })
       .then((response) => {
         const valence = response.data; //store the response.data in a const, valence score
-        setValenceScore(valence); //update valenceScore state
+        setValenceScore(valence); //update valenceScore state with setter function
       })
       .catch((error) => {
         console.log("Error getting valence:", error);
       });
   };
-  console.log(valenceScore);
 
   //Function to update the formData state with the user's choice of track
   const updateSelectedTrack = (chosenTrack) => {
@@ -108,12 +107,13 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
   return (
     <div>
       <h3>Which of these emotions do you want to focus on?</h3>
-      <form>
+      <form className="radio-container">
         {emotions.map((emotion) => (
           <div key={emotion}>
-            <label>
+            <label className="radio-label">
               <input
                 type="radio"
+                className="emo-radio"
                 value={emotion}
                 checked={selectedEmotion === emotion}
                 onChange={handleEmotionChange}

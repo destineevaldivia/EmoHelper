@@ -36,7 +36,7 @@ function App() {
   return (
     <>
       <div>
-        <h1 className="App-title">EmoHelper app </h1>
+        <h1 className="App-title">EmoHelper </h1>
         <p>emotion + music journaling </p>
         {!token ? (
           <a className="App-link" href="http://localhost:8080/login">

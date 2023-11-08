@@ -1,36 +1,70 @@
 body {
+  color: rgb(44, 41, 54);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.App-title {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: rgb(57, 54, 70);
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 3rem;
+  text-transform: uppercase;
 }
-/* RADIO BUTTON STYLING */
-/* Style the radio container */
-.radio-container {
-  display: flex;
-  flex-direction: column;
+
+h2 {
+  border: 2px solid #333; /* Border style, color, and width */
+  border-radius: 10px; /* Adjust the border-radius as needed */
+  padding: 10px; /* Add padding for spacing between text and border */
+  background-color: #f0f0f0; /* Background color behind the h2 text */
+  color: #333; /* Text color */
 }
-/* Style the radio labels and hide the default radio buttons */
+
+p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* custom radio buttons */
 .radio-label {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   cursor: pointer;
 }
+
 /* Style the custom radio buttons */
 .emo-radio {
-  /* appearance: none; */
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  margin-right: 10px;
-  /* outline: none; */
-  transition: border-color 0.3s ease-in-out;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
 }
-/* Style the custom radio button when selected */
-.emo-radio:checked {
-  border-color: #00ff9d; /* Change to your desired color */
+
+/* Hide the default radio button visually, but keep it for accessibility */
+.emo-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
 }
-/* Style the custom radio button when hovered */
-.emo-radio:hover {
-  border-color: #ab0e0e;
+
+/* Apply styles to the list items */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 20px;
+}
+
+/* Apply styles to the links */
+a {
+  text-decoration: none;
+  color: #007bff; /* Link color */
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 /* root {
@@ -40,27 +74,8 @@ body {
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
@@ -68,10 +83,3 @@ body {
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */

@@ -106,7 +106,7 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
 
   return (
     <div>
-      <h3>Which of these emotions do you want to focus on?</h3>
+      <h2>Which of these emotions do you want to focus on?</h2>
       <form className="radio-container">
         {emotions.map((emotion) => (
           <div key={emotion}>

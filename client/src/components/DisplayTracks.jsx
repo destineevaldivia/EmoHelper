@@ -47,16 +47,20 @@ const DisplayTracks = ({
   return (
     <>
       <div>
-        <h3>Which of these two tracks best describes how you're feeling?</h3>
-        <p>Click link to preview song on Spotify</p>
+        <h2>Which of these two tracks best describes how you're feeling?</h2>
+        <p>Click link to preview on Spotify</p>
         <ul>
           {matchedTracks.map((track) => (
             <li key={track.id}>
+              <img src={track.album.images[1].url} alt={track.album.images} />
               <a href={track.external_urls.spotify} target="_blank">
+                <p>track name:</p>
                 {track.name}
               </a>
-              <img src={track.album.images[1].url} alt={track.album.images} />
-              <button onClick={() => handleUserChoice(track.name)}>
+              <button
+                className="choose-track-btn"
+                onClick={() => handleUserChoice(track.name)}
+              >
                 Choose this track
               </button>
             </li>

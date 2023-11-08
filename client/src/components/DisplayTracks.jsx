@@ -55,6 +55,7 @@ const DisplayTracks = ({
               <a href={track.external_urls.spotify} target="_blank">
                 {track.name}
               </a>
+              <img src={track.album.images[1].url} alt={track.album.images} />
               <button onClick={() => handleUserChoice(track.name)}>
                 Choose this track
               </button>

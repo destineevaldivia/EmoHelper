@@ -12,7 +12,9 @@ body {
   font-size: 3rem;
   text-transform: uppercase;
 }
-
+h2 {
+  margin: 0;
+}
 h3 {
   border: 2px solid #333;
   border-radius: 10px;
@@ -27,15 +29,20 @@ p {
   margin-bottom: 10px;
 }
 
-/* RADIO BUTTONS */
+/* Radio Buttons */
 .radio-label {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
   cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
-/* Style the custom radio buttons */
+.radio-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .emo-radio {
   cursor: pointer;
   width: 24px;
@@ -74,7 +81,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* DECISION BUTTON STYLES */
+/* decision btn styles */
 .let-go-btn,
 .embrace-btn {
   display: inline-block;
@@ -93,8 +100,38 @@ a:hover {
   transform-origin: center;
 }
 
-/* Simple hover effect */
 .let-go-btn:hover,
 .embrace-btn:hover {
-  transform: scale(1.1); /* Scale up on hover */
+  transform: scale(1.1);
+}
+
+.submit-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #e74c3c; /* Red border color */
+  border-radius: 5px;
+  color: #e74c3c; /* Red text color */
+  background-color: #fff;
+  transition: border-color 0.3s, color 0.3s, background-color 0.3s,
+    transform 0.3s;
+}
+.submit-btn:hover {
+  transform: scale(1.2);
+}
+
+/* emotion entry styles*/
+.emo-entry {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 20px;
+  border: 2px solid #ddd;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px;
 }

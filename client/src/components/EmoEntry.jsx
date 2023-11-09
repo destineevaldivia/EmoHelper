@@ -7,11 +7,15 @@ const EmoEntry = ({ formData }) => {
   const currentDate = getCurrentDate();
   return (
     <div>
-      <h2>
-        On {currentDate} you were experiencing {formData.user_emotion} and it
-        was giving, '{formData.selected_track}' vibes. You decided to{" "}
-        {formData.decision}.
-      </h2>
+      <h3>Here is your Emo Entry:</h3>
+
+      <div className="emo-entry">
+        <h2>
+          On {currentDate} you were experiencing {formData.user_emotion} and it
+          was giving, '{formData.selected_track}' vibes. You decided to{" "}
+          {formData.decision}.
+        </h2>
+      </div>
     </div>
   );
 };

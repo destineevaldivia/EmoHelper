@@ -94,7 +94,7 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       .then((response) => {
         console.log("Emo entry created successfully");
         //imported success messaging with toast
-        toast.success("Your Emo entry was created successfully!", {
+        toast.success("Your Emo entry was saved successfully!", {
           position: "top-center",
           autoClose: 3000, // Close the toast after 3 seconds
         });
@@ -109,18 +109,16 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       <h3>Which of these emotions do you want to focus on?</h3>
       <form className="radio-container">
         {emotions.map((emotion) => (
-          <div key={emotion}>
-            <label className="radio-label">
-              <input
-                type="radio"
-                className="emo-radio"
-                value={emotion}
-                checked={selectedEmotion === emotion}
-                onChange={handleEmotionChange}
-              />
-              {emotion}
-            </label>
-          </div>
+          <label key={emotion} className="radio-label">
+            <input
+              type="radio"
+              className="emo-radio"
+              value={emotion}
+              checked={selectedEmotion === emotion}
+              onChange={handleEmotionChange}
+            />
+            {emotion}
+          </label>
         ))}
       </form>
       {selectedEmotion ? (
@@ -144,8 +142,12 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
       {decision ? (
         <div>
           <EmoEntry formData={formData} />
-          <button type="submit" onClick={handleSubmitForm}>
-            Create Emo entry
+          <button
+            className="submit-btn"
+            type="submit"
+            onClick={handleSubmitForm}
+          >
+            Save
           </button>
         </div>
       ) : null}

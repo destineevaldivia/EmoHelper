@@ -3,6 +3,7 @@ body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+
 .App-title {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   color: rgb(57, 54, 70);
@@ -12,12 +13,12 @@ body {
   text-transform: uppercase;
 }
 
-h2 {
-  border: 2px solid #333; /* Border style, color, and width */
-  border-radius: 10px; /* Adjust the border-radius as needed */
-  padding: 10px; /* Add padding for spacing between text and border */
-  background-color: #f0f0f0; /* Background color behind the h2 text */
-  color: #333; /* Text color */
+h3 {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  color: #333;
 }
 
 p {
@@ -26,7 +27,7 @@ p {
   margin-bottom: 10px;
 }
 
-/* custom radio buttons */
+/* RADIO BUTTONS */
 .radio-label {
   display: flex;
   align-items: center;
@@ -51,35 +52,49 @@ p {
 ul {
   list-style: none;
   padding: 0;
+  display: flex;
 }
 
 li {
   margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.track-info {
+  margin-left: 10px;
 }
 
 /* Apply styles to the links */
 a {
   text-decoration: none;
-  color: #007bff; /* Link color */
+  color: #007bff;
 }
 
 a:hover {
   text-decoration: underline;
 }
 
-/* root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* DECISION BUTTON STYLES */
+.let-go-btn,
+.embrace-btn {
+  display: inline-block;
+  padding: 35px 70px;
+  font-size: 25px;
+  font-weight: bold;
   text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid rgb(63, 46, 62);
+  border-radius: 5px;
+  color: rgb(248, 247, 246);
+  background-color: #1f1f1f;
+  transition: border-color 0.3s, color 0.3s, background-color 0.3s,
+    transform 0.3s;
+  transform-origin: center;
 }
 
-
-
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Simple hover effect */
+.let-go-btn:hover,
+.embrace-btn:hover {
+  transform: scale(1.1); /* Scale up on hover */
 }
-

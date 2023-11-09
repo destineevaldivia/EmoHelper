@@ -5,11 +5,11 @@ const Decision = ({ handleDecision }) => {
   };
   return (
     <div>
-      <h2>
+      <h3>
         Now it's time to make a decision about what to do with this emotion. Do
         you want to:{" "}
-      </h2>
-      <button className="letgo-btn" onClick={() => makeDecision("Let it go")}>
+      </h3>
+      <button className="let-go-btn" onClick={() => makeDecision("Let it go")}>
         Let it go
       </button>{" "}
       or{" "}

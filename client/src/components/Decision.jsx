@@ -1,4 +1,6 @@
+// receives handleDecision function as a prop, triggered by onClick fxn
 const Decision = ({ handleDecision }) => {
+  // Function to handle the user's decision
   const makeDecision = (decision) => {
     handleDecision(decision);
     console.log("decision:", decision);

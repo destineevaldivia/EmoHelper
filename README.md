@@ -1,6 +1,14 @@
 # EmoHelper
 
-Premise: Emotional awareness is the process of recognizing and acknowledging your feelings. Naming the emotion and being curious about it, can help you accept your feelings.
+![Alt text](emohelper-demo-screenshot.png)
+
+# Overview:
+
+EmoHelper is a validation journal that helps you name your emotions and uses the Spotify Web Api to find a track from your own personal library that might evoke a similar feeling, based on the track's valence attributes.
+
+Lastly the app generates a statement which I’m calling "emo entries".
+
+Emotional awareness is the process of recognizing and acknowledging your feelings. Naming the emotion and being curious about it, can help you accept your feelings.
 
 Pitch: I'm creating an emotion + music journal. The app uses your emotional input and other user input to create a journal entry, that I'm calling "Emo Entry" to log to the databse.
 

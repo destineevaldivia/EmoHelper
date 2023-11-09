@@ -1,7 +1,8 @@
 import axios from "axios";
 
-/** Place all spotify api related logic here **/
+/** Place all Spotify API related logic here **/
 
+// Function to extract access token from the URL
 const getAccessToken = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -15,6 +16,7 @@ const getAccessToken = () => {
 
   return accessToken;
 };
+// Export the access token as a constant
 export const accessToken = getAccessToken();
 
 /*Get req to Spotify endpoint (Get User's Saved Tracks)

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-
+// receive states and functions as props
 const DisplayTracks = ({
   audioFeatures,
   selectedEmotion,
@@ -7,11 +6,13 @@ const DisplayTracks = ({
   savedTracks,
   updateSelectedTrack,
 }) => {
+  // logging input data for debugging
   console.log("in displaytracks audiofeature", audioFeatures);
   console.log("in displaytracks emo", selectedEmotion);
   console.log("in display tracks valencescore", valenceScore);
   console.log("in display tracks savedTracks", savedTracks);
 
+  // Parse valenceScore as a float because its logging as a string
   const valScore = parseFloat(valenceScore);
 
   // Calculate the differences for all tracks
@@ -39,11 +40,13 @@ const DisplayTracks = ({
     }
   });
 
+  // Function to handle user choice of a track
   const handleUserChoice = (chosenTrack) => {
     updateSelectedTrack(chosenTrack);
     console.log("chosen track", chosenTrack);
   };
 
+  // Component JSX to render track info
   return (
     <>
       <div>

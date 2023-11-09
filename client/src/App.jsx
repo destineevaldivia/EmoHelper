@@ -37,7 +37,7 @@ function App() {
     <>
       <div>
         <h1 className="App-title">EmoHelper </h1>
-        <p>emotion + music journaling </p>
+        <h4> *~*~* validation journal *~*~* </h4>
         {!token ? (
           <a className="App-link" href="http://localhost:8080/login">
             <button>Log in using Spotify</button>

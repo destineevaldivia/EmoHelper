@@ -1,27 +1,29 @@
 # EmoHelper
 
+App Overview: EmoHelper is a validation journal designed to enhance emotional awareness. It guides users through the process of identifying their emotions. Leveraging the Spotify Web API, the app intelligently suggests tracks from the user's personal Spotify library that align with the emotional tone, using the valence data of each track. As a final touch, EmoHelper generates personalized "emo entries" — validating statements in line with the app's theme — and securely stores them in a database.
+
+Pitch: Embrace emotional awareness with EmoHelper. This unique app not only helps you recognize and name your emotions, but it also offers a cathartic experience by curating music that you can listen to. At the end, you're empowered to decide whether to 'let go' or 'embrace it', which is a crucial step for facilitating emotional processing.
+
 ![Alt text](emohelper-demo-screenshot.png)
 
-# Overview:
+# Techstack
 
-EmoHelper is a validation journal that helps you name your emotions and uses the Spotify Web Api to find a track from your own personal library that might evoke a similar feeling, based on the track's valence attributes.
+Languages: Javascript, HTML, CSS
+Frameworks: React.js, Express.js, Node.js, PostgreSQL
+API: Spotify Web API, multiple endpoints (see SpotifyApi.js)
+https://developer.spotify.com/documentation/web-api
 
-Lastly the app generates a statement which I’m calling "emo entries".
+See db.sql file for database schema and tables
 
-Emotional awareness is the process of recognizing and acknowledging your feelings. Naming the emotion and being curious about it, can help you accept your feelings.
+# User Flow and Component Tree
 
-Pitch: I'm creating an emotion + music journal. The app uses your emotional input and other user input to create a journal entry, that I'm calling "Emo Entry" to log to the databse.
+![Alt text](<userflow wireframe screenshot.png>)
 
-How does it work: The app prompts user to choose an emotion that they'd like to focus on.
-Then, the app will find two songs from the user’s personal Spotify playlist that match the corresponding valence score, which is a measure of how positive or negative the audio feature of that song are. The user will select one that best represents their emotional state.Pondering which song captures your emotions, is not only a creative task, but also a way to acknowledge your feelings.
+# Considering Future Features and Limitations
 
-Lastly, the user will be prompted to embrace it or let it go.
-
-All of the user input is then aggregated to generate a journal entry, that I'm calling "Emo Entry" which can be saved to the database.
-
-Pitch Deck: https://www.figma.com/file/OUxecMdtDo0WdrmVLy6bTp/Emotions-and-music-App?type=design&node-id=47%3A145&mode=design&t=8cgqHuhDKPEqCQgU-1
-
-Trello Board: https://trello.com/invite/b/gLTtKMBG/
-
-Nice-to-Have's:
-In the future, I'd like to not only save the user input data to create a journal entry, but also to redirect them to a dashboard that shows a list of all their emo entries, and potentially creates a emotion playlist on spotify that reflects the journal entry selections.
+1. In the future, I'd like to not only save the emo entries in the db, but also create a dashboard where users can look back at all their previous entries.
+2. Currently, the user can is redirected to their spotify account to listen to the song and I'd like to add a feature where they can listen within the app and create emo_playlists from their dashboard entries as well
+3. Use a language model or chat GPT to allow users to search with any emotion rather than the hard coded mapped out emotion options.
+4. Consider the limitation that only non-spotify account holder can use this app and consider explanding it to multiple streaming services like apple music, etc.
+5. Enhance the music curation by considering additional music features such as the tracks "danceability", "energy" and "loudness".
+6. Address another limitation: emotions are entirely subjective and the app might not suggest songs that accurately represent the emotion being felt. One small solution, which doesnt address the whole problem, is allowing a reshuffle of the song.

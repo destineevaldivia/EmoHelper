@@ -42,5 +42,5 @@ CREATE TABLE EmoEntries (
 );
 
 INSERT INTO EmoEntries (selected_track, user_emotion, decision ) {
-...
+
 }

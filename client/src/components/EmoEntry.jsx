@@ -10,7 +10,7 @@ const EmoEntry = ({ formData }) => {
 
   // use formData to create an interpolated statement for the emoEntry
   return (
-    <div>
+    <section>
       <h3>Here is your Emo Entry:</h3>
 
       <div className="emo-entry">
@@ -20,7 +20,7 @@ const EmoEntry = ({ formData }) => {
           {formData.decision}.
         </h2>
       </div>
-    </div>
+    </section>
   );
 };
 

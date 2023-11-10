@@ -104,12 +104,13 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
   };
 
   return (
-    <div>
+    <section>
       {/* render emotion selection form */}
       <h3>Which of these emotions do you want to focus on?</h3>
-      <form className="radio-container">
+      {/* see accessibility aria attribute for screen readers to anounce updates */}
+      <form className="radio-container" aria-live="polite">
         {emotions.map((emotion) => (
-          <label key={emotion} className="radio-label">
+          <label key={emotion} className="radio-label" htmlFor={emotion}>
             <input
               type="radio"
               className="emo-radio"
@@ -154,7 +155,7 @@ const EmotionForm = ({ audioFeatures, savedTracks }) => {
           </button>
         </div>
       ) : null}
-    </div>
+    </section>
   );
 };
 export default EmotionForm;

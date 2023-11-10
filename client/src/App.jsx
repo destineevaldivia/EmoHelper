@@ -39,7 +39,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <section>
         <h1 className="App-title">EmoHelper </h1>
         <h4> *~*~* validation journal *~*~* </h4>
         {/* Conditionally render login button and emotion form component*/}
@@ -58,7 +58,7 @@ function App() {
             </div>
           </div>
         )}
-      </div>
+      </section>
       {/* Toast notifications container */}
       <ToastContainer />
     </>

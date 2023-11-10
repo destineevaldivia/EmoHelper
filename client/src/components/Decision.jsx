@@ -6,7 +6,7 @@ const Decision = ({ handleDecision }) => {
     console.log("decision:", decision);
   };
   return (
-    <div>
+    <section>
       <h3>
         Now it's time to make a decision about what to do with this emotion. Do
         you want to:{" "}
@@ -21,7 +21,7 @@ const Decision = ({ handleDecision }) => {
       >
         Embrace it
       </button>
-    </div>
+    </section>
   );
 };
 

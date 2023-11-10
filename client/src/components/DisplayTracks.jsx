@@ -49,7 +49,7 @@ const DisplayTracks = ({
   // Component JSX to render track info
   return (
     <>
-      <div>
+      <section>
         <h3>Which of these two tracks best describes how you're feeling?</h3>
         <p>Click link to preview on Spotify then choose a track</p>
         <ul>
@@ -70,7 +70,7 @@ const DisplayTracks = ({
             </li>
           ))}
         </ul>
-      </div>
+      </section>
     </>
   );
 };

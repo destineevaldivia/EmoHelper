@@ -1,42 +1,136 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  color: rgb(44, 41, 54);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.App-title {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: rgb(57, 54, 70);
+  letter-spacing: 3px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+h2 {
+  margin: 0;
+}
+h3 {
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Radio Buttons */
+.radio-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.radio-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.emo-radio {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+/* Hide the default radio button visually, but keep it for accessibility */
+.emo-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+
+/* Apply styles to the list items */
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+li {
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.track-info {
+  margin-left: 10px;
+}
+
+/* Apply styles to the links */
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* decision btn styles */
+.let-go-btn,
+.embrace-btn {
+  display: inline-block;
+  padding: 35px 70px;
+  font-size: 25px;
+  font-weight: bold;
   text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid rgb(63, 46, 62);
+  border-radius: 5px;
+  color: rgb(248, 247, 246);
+  background-color: #1f1f1f;
+  transition: border-color 0.3s, color 0.3s, background-color 0.3s,
+    transform 0.3s;
+  transform-origin: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.let-go-btn:hover,
+.embrace-btn:hover {
+  transform: scale(1.1);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.submit-btn {
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #e74c3c; /* Red border color */
+  border-radius: 5px;
+  color: #e74c3c; /* Red text color */
+  background-color: #fff;
+  transition: border-color 0.3s, color 0.3s, background-color 0.3s,
+    transform 0.3s;
+}
+.submit-btn:hover {
+  transform: scale(1.2);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* emotion entry styles*/
+.emo-entry {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 20px;
+  border: 2px solid #ddd;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px;
 }
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */

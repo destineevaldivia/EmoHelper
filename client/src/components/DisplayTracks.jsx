@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-
+// receive states and functions as props
 const DisplayTracks = ({
   audioFeatures,
   selectedEmotion,
@@ -7,11 +6,13 @@ const DisplayTracks = ({
   savedTracks,
   updateSelectedTrack,
 }) => {
+  // logging input data for debugging
   console.log("in displaytracks audiofeature", audioFeatures);
   console.log("in displaytracks emo", selectedEmotion);
   console.log("in display tracks valencescore", valenceScore);
   console.log("in display tracks savedTracks", savedTracks);
 
+  // Parse valenceScore as a float because its logging as a string
   const valScore = parseFloat(valenceScore);
 
   // Calculate the differences for all tracks
@@ -39,29 +40,37 @@ const DisplayTracks = ({
     }
   });
 
+  // Function to handle user choice of a track
   const handleUserChoice = (chosenTrack) => {
     updateSelectedTrack(chosenTrack);
     console.log("chosen track", chosenTrack);
   };
 
+  // Component JSX to render track info
   return (
     <>
-      <div>
+      <section>
         <h3>Which of these two tracks best describes how you're feeling?</h3>
-        <p>Click link to preview song on Spotify</p>
+        <p>Click link to preview on Spotify then choose a track</p>
         <ul>
           {matchedTracks.map((track) => (
             <li key={track.id}>
-              <a href={track.external_urls.spotify} target="_blank">
-                {track.name}
-              </a>
-              <button onClick={() => handleUserChoice(track.name)}>
+              <img src={track.album.images[1].url} alt={track.album.images} />
+              <div className="track-info">
+                <a href={track.external_urls.spotify} target="_blank">
+                  <h4>{track.name} </h4>
+                </a>
+              </div>
+              <button
+                className="choose-track-btn"
+                onClick={() => handleUserChoice(track.name)}
+              >
                 Choose this track
               </button>
             </li>
           ))}
         </ul>
-      </div>
+      </section>
     </>
   );
 };

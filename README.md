@@ -1,19 +1,37 @@
 # EmoHelper
 
-Premise: Emotional awareness is the process of recognizing and acknowledging your feelings. Naming the emotion and being curious about it, can help you accept your feelings.
+Overview: EmoHelper is a unique guide to emotional awareness with the help of music. Leveraging the Spotify Web API, the app curates tracks from the user's personal Spotify library that align with their emotional state. I employed valence data, a measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track and the user's emotional input to map the correlation.
 
-Pitch: I'm creating an emotion + music journal. The app uses your emotional input and other user input to create a journal entry, that I'm calling "Emo Entry" to log to the databse.
+The app offers a cathartic experience with validating ‘emo-entries’, personalized statements, that look like handwrritten notes to self, acknowledging their emotional state, song choice, and the decision to embrace or let go. The entry is then securely stored in a databse.
 
-How does it work: The app prompts user to choose an emotion that they'd like to focus on.
-Then, the app will find two songs from the user’s personal Spotify playlist that match the corresponding valence score, which is a measure of how positive or negative the audio feature of that song are. The user will select one that best represents their emotional state.Pondering which song captures your emotions, is not only a creative task, but also a way to acknowledge your feelings.
+As a final touch, the user can listen to the selected tracks on their Spotify account by clicking on the album art. The journey through the app not only offers a cathartic experience but also provides a chance for users to actively practice their emotional processing skills.
 
-Lastly, the user will be prompted to embrace it or let it go.
+![Alt text](emohelper-demo-screenshot.png)
 
-All of the user input is then aggregated to generate a journal entry, that I'm calling "Emo Entry" which can be saved to the database.
+# Techstack
 
-Pitch Deck: https://www.figma.com/file/OUxecMdtDo0WdrmVLy6bTp/Emotions-and-music-App?type=design&node-id=47%3A145&mode=design&t=8cgqHuhDKPEqCQgU-1
+- Languages: Javascript, HTML, CSS
+- Frameworks: React.js, Express.js, Node.js, PostgreSQL
+- Spotify Web API: https://developer.spotify.com/documentation/web-api
 
-Trello Board: https://trello.com/invite/b/gLTtKMBG/
+# User Flow and Component Tree
 
-Nice-to-Have's:
-In the future, I'd like to not only save the user input data to create a journal entry, but also to redirect them to a dashboard that shows a list of all their emo entries, and potentially creates a emotion playlist on spotify that reflects the journal entry selections.
+![Alt text](<userflow wireframe screenshot.png>)
+
+# Future Features and Limitations
+
+1. Implement a dashboard feature for users to revisit and reflect on their stored 'emo entries'.
+2. Enable in-app music playback and empower users to craft 'emo_playlists' directly from their dashboard entries.
+3. Integrate a language model or chat GPT, allowing users to search using any emotion beyond preset options.
+4. Explore extending compatibility beyond Spotify, considering inclusion of multiple streaming services like Apple Music.
+5. Elevate music curation by incorporating additional track attributes like "danceability," "energy," and "loudness."
+6. Allow users to reshuffle suggested songs if they don't like the suggestions.
+7. Explore solutions to improve accuracy in suggesting songs that truly resonate with the user's emotional state, recognizing the inherent challenge of emotions being entirely subjective
+
+# Installation
+
+1. The Spotify Web API requires authentication through OAuth, and users need to obtain their own access tokens. Users can authenticate using the Authorization Code Flow.
+   https://developer.spotify.com/documentation/web-api/tutorials/getting-started
+2. Clone the repo
+3. See secret key example in .env-example
+4. Run on your local server

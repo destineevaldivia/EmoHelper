@@ -9,7 +9,6 @@ import EmotionForm from "./components/EmotionForm";
 import { ToastContainer } from "react-toastify";
 
 function App() {
-  // state variables
   const [token, setToken] = useState(null);
   const [savedTracks, setSavedTracks] = useState(null);
   const [audioFeatures, setAudioFeatures] = useState(null);

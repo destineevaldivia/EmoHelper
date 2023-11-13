@@ -5,7 +5,6 @@ const EmoEntry = ({ formData }) => {
   const getCurrentDate = () => {
     return new Date().toLocaleDateString();
   };
-  // get current date
   const currentDate = getCurrentDate();
 
   // use formData to create an interpolated statement for the emoEntry

@@ -1,8 +1,10 @@
 # EmoHelper
 
-App Overview: EmoHelper is a validation journal designed to enhance emotional awareness. It guides users through the process of identifying their emotions. Leveraging the Spotify Web API, the app intelligently suggests tracks from the user's personal Spotify library that align with the emotional tone, using the valence data of each track. As a final touch, EmoHelper generates personalized "emo entries" — validating statements in line with the app's theme — and securely stores them in a database.
+App Overview: EmoHelper is a unique guide to emotional awareness with the help of music. Leveraging the Spotify Web API, the app curates tracks from the user's personal Spotify library that align with their emotional state. I employed valence data, a measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track and the user's emotional input to map the correlation.
 
-Pitch: Embrace emotional awareness with EmoHelper. This unique app not only helps you recognize and name your emotions, but it also offers a cathartic experience by curating music that you can listen to. At the end, you're empowered to decide whether to 'let go' or 'embrace it', which is a crucial step for facilitating emotional processing.
+The app offers a cathartic experience with validating ‘emo-entries’, personalized statements, that look like handwrritten notes to self, acknowledging their emotional state, song choice, and the decision to embrace or let go. The entry is then securely stored in a databse.
+
+As a final touch, the user can listen to the selected tracks on their Spotify account by clicking on the album art. The journey through the app not only offers a cathartic experience but also provides a chance for users to actively practice their emotional processing skills.
 
 ![Alt text](emohelper-demo-screenshot.png)
 

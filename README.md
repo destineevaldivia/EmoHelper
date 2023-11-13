@@ -23,12 +23,13 @@ See db.sql file for database schema and tables
 
 # Future Features and Limitations
 
-1. In the future, I'd like to not only save the emo entries in the db, but also create a dashboard where users can look back at all their previous entries.
-2. Currently, the user can is redirected to their spotify account to listen to the song and I'd like to add a feature where they can listen within the app and create emo_playlists from their dashboard entries as well
-3. Use a language model or chat GPT to allow users to search with any emotion rather than the hard coded mapped out emotion options.
-4. Consider the limitation that only non-spotify account holder can use this app and consider explanding it to multiple streaming services like apple music, etc.
-5. Enhance the music curation by considering additional music features such as the tracks "danceability", "energy" and "loudness".
-6. Address another limitation: emotions are entirely subjective and the app might not suggest songs that accurately represent the emotion being felt. One small solution, which doesnt address the whole problem, is allowing a reshuffle of the song.
+1. Implement a dashboard feature for users to revisit and reflect on their stored 'emo entries'.
+2. Enable in-app music playback and empower users to craft 'emo_playlists' directly from their dashboard entries.
+3. Integrate a language model or chat GPT, allowing users to search using any emotion beyond preset options.
+4. Explore extending compatibility beyond Spotify, considering inclusion of multiple streaming services like Apple Music.
+5. Elevate music curation by incorporating additional track attributes like "danceability," "energy," and "loudness."
+6. Allow users to reshuffle suggested songs if they don't like the suggestions.
+7. Explore solutions to improve accuracy in suggesting songs that truly resonate with the user's emotional state, recognizing the inherent challenge of emotions being entirely subjective
 
 # installation
 
